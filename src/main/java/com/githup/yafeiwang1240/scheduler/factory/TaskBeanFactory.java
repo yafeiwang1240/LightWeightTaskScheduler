@@ -4,10 +4,8 @@ import com.githup.yafeiwang1240.scheduler.context.JobExecutionContext;
 import com.githup.yafeiwang1240.scheduler.core.TimeDecoder;
 import com.githup.yafeiwang1240.scheduler.handler.TaskManageHandler;
 import com.githup.yafeiwang1240.scheduler.job.JobTrigger;
-import com.githup.yafeiwang1240.scheduler.util.DateUtils;
 import com.githup.yafeiwang1240.scheduler.worker.Worker;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -149,7 +147,6 @@ public class TaskBeanFactory implements TaskFactory {
                         String key = work.getKey();
                         Worker worker = work.getValue();
                         executeWorker(key, worker);
-                        System.out.println(sum++ + ": " + DateUtils.toString(new Date()));
                         try {
                             Thread.sleep(1);
                         } catch (InterruptedException e) {

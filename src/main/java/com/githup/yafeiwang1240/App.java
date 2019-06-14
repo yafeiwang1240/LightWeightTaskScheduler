@@ -5,9 +5,9 @@ import com.githup.yafeiwang1240.scheduler.JobClient;
 import com.githup.yafeiwang1240.scheduler.context.JobExecutionContext;
 import com.githup.yafeiwang1240.scheduler.exception.JobExecutionException;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Hello world!
@@ -26,7 +26,11 @@ public class App
         map.put("4", "这是测试4");
         JobClient.start();
 
-        JobClient.submit("test", "test", 1000, TimeUnit.MILLISECONDS, JobText.class, map);
+        try {
+            JobClient.submit("test", "test", "2019-06-14 13:56:50", JobText.class, map);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     public static class JobText implements Job {
