@@ -35,7 +35,7 @@ public class WorkerBeanFactory implements WorkerFactory {
         if(worker == null) {
             JobKey jobKey = new JobKey(name, group);
             JobDetailImpl jobDetail = new JobDetailImpl();
-            jobDetail.setDescription(String.format("新建任务: {0}, name: {1}, group: {2}", clazz, jobKey.getName(), jobKey.getGroup()));
+            jobDetail.setDescription(String.format("新建任务: %s, name: %s, group: %s", clazz.toString(), jobKey.getName(), jobKey.getGroup()));
             jobDetail.setJobClass(clazz);
             jobDetail.setJobKey(jobKey);
             JobDataMap jobDataMap = new JobDataMap(dataMap);
@@ -58,7 +58,7 @@ public class WorkerBeanFactory implements WorkerFactory {
             jobTrigger.compute();
             JobDetail jobDetail = jobTrigger.getJobDetail();
             JobKey jobKey = jobDetail.getJobKey();
-            ((JobDetailImpl) jobDetail).setDescription(String.format("更新任务: {0}, name: {1}, group: {2}", clazz, jobKey.getName(), jobKey.getGroup()));
+            ((JobDetailImpl) jobDetail).setDescription(String.format("更新任务: %s, name: %s, group: %s", clazz.toString(), jobKey.getName(), jobKey.getGroup()));
             ((JobDetailImpl) jobDetail).setJobClass(clazz);
             ((JobDetailImpl) jobDetail).putAllDataMap(dataMap);
         }

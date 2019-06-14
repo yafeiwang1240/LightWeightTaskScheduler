@@ -32,6 +32,11 @@ public class SchedulerBuilder {
         return this;
     }
 
+    public SchedulerBuilder withCapacity(int capacity) {
+        config.setCapacity(capacity);
+        return this;
+    }
+
 
     public Scheduler build() {
         Config _config = new Config();

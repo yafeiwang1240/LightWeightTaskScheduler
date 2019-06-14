@@ -13,6 +13,7 @@ import com.githup.yafeiwang1240.scheduler.worker.WorkerThreadPool;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class MutexScheduler {
@@ -21,7 +22,7 @@ public class MutexScheduler {
 
     private volatile int index = 0;
 
-    private ThreadPoolExecutor mainThreadExecutor;
+    private ExecutorService mainThreadExecutor;
 
     private ThreadPoolExecutor taskThreadExecutor;
 
@@ -42,7 +43,7 @@ public class MutexScheduler {
                     config.getKeepAliveTime(), config.getUnit(),
                     config.getCapacity());
         }
-        mainThreadExecutor = WorkerThreadPool.newSignalThreadExecutor();
+        mainThreadExecutor = WorkerThreadPool.newSingleThreadExecutor();
         init();
     }
 

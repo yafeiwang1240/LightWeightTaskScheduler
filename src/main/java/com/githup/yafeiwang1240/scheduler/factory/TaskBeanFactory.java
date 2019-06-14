@@ -4,8 +4,10 @@ import com.githup.yafeiwang1240.scheduler.context.JobExecutionContext;
 import com.githup.yafeiwang1240.scheduler.core.TimeDecoder;
 import com.githup.yafeiwang1240.scheduler.handler.TaskManageHandler;
 import com.githup.yafeiwang1240.scheduler.job.JobTrigger;
+import com.githup.yafeiwang1240.scheduler.util.DateUtils;
 import com.githup.yafeiwang1240.scheduler.worker.Worker;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -79,7 +81,11 @@ public class TaskBeanFactory implements TaskFactory {
             return false;
         }
         if(taskTracker == null) {
-            taskTracker = new TaskTracker();
+            synchronized (this) {
+                if(taskTracker == null) {
+                    taskTracker = new TaskTracker();
+                }
+            }
         }
         state = TaskState.RUNNABLE;
         taskTracker.ready();
@@ -101,12 +107,13 @@ public class TaskBeanFactory implements TaskFactory {
 
     public class TaskTracker implements Runnable {
         private boolean exit = false;
+        private int sum = 0;
         @Override
         public void run() {
+            Map<String, Worker> removes = null;
+            Map<String, Worker> executes = null;
             while(!exit) {
                 long now = System.currentTimeMillis();
-                Map<String, Worker> removes = null;
-                Map<String, Worker> executes = null;
                 for(Map.Entry<String, Worker> work : workerMap.entrySet()) {
                     String key = work.getKey();
                     Worker worker = work.getValue();
@@ -126,19 +133,35 @@ public class TaskBeanFactory implements TaskFactory {
                         executes.put(key, worker);
                     }
                 }
-                if(removes != null) {
+                // remove
+                if(removes != null && removes.size() > 0) {
                     for(Map.Entry<String, Worker> work : removes.entrySet()) {
                         String key = work.getKey();
                         Worker worker = work.getValue();
                         removeWorker(key, worker);
                     }
+                    removes.clear();
                 }
 
-                if(executes != null) {
+                // execute
+                if(executes !=  null && executes.size() > 0) {
                     for(Map.Entry<String, Worker> work : executes.entrySet()) {
                         String key = work.getKey();
                         Worker worker = work.getValue();
                         executeWorker(key, worker);
+                        System.out.println(sum++ + ": " + DateUtils.toString(new Date()));
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+
+                        }
+                    }
+                    executes.clear();
+                } else {
+                    try {
+                        Thread.sleep(1);
+                    } catch (InterruptedException e) {
+
                     }
                 }
             }

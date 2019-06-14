@@ -18,10 +18,11 @@ public class JobClient {
 
     static {
         Scheduler scheduler = SchedulerBuilder.newSchedulerBuilder()
-                .withCorePoolSize(2)
+                .withCorePoolSize(1)
                 .withGroup("Scheduler_Group")
                 .withMaximumPoolSize(5)
                 .withName("Scheduler")
+                .withCapacity(40)
                 .build();
         schedulerFactory = new SchedulerBeanFactory(scheduler);
     }
@@ -38,9 +39,9 @@ public class JobClient {
     }
 
     /**
-     *  执行一次定时任务
+     *
      * @param group
-     * @param name
+     * @param name [任务名称]
      * @param startTime [yyyy-MM-dd HH:mm:ss]
      * @param clazz [job class]
      * @return
@@ -77,37 +78,39 @@ public class JobClient {
     }
 
     /**
-     *  执行一次定时任务
+     * 执行一次定时任务
      * @param name
-     * @param startTime [yyyy-MM-dd HH:mm:ss]
-     * @param clazz [job class]
+     * @param startTime
+     * @param clazz
      * @param map
      * @return
+     * @throws ParseException
      */
     public static boolean submit(String name, String startTime, Class<? extends Job> clazz, Map<?, ?> map) throws ParseException {
         return submit(name, null, startTime, TimeDecoder.IS_STOP_TIME, null, clazz, map);
     }
 
     /**
-     *  执行一次定时任务
-     * @param group
+     * 执行一次定时任务
      * @param name
-     * @param startTime [yyyy-MM-dd HH:mm:ss]
-     * @param clazz [job class]
+     * @param group
+     * @param startTime
+     * @param clazz
      * @param map
      * @return
+     * @throws ParseException
      */
     public static boolean submit(String name, String group, String startTime, Class<? extends Job> clazz, Map<?, ?> map) throws ParseException {
         return submit(name, group, startTime, TimeDecoder.IS_STOP_TIME, null, clazz, map);
     }
 
     /**
-     *  重复执行定时任务
+     * 重复执行定时任务
      * @param name
      * @param group
      * @param space
      * @param unit
-     * @param clazz [job class]
+     * @param clazz
      * @param map
      * @return
      */
@@ -116,15 +119,16 @@ public class JobClient {
     }
 
     /**
-     *  重复执行定时任务
+     * 重复执行定时任务
      * @param name
      * @param group
-     * @param startTime [yyyy-MM-dd HH:mm:ss]
+     * @param startTime
      * @param space
      * @param unit
-     * @param clazz [job class]
+     * @param clazz
      * @param map
      * @return
+     * @throws ParseException
      */
     public static boolean submit(String name, String group, String startTime, long space, TimeUnit unit, Class<? extends Job> clazz, Map<?, ?> map) throws ParseException {
         long start = DateUtils.toLong(DateUtils.toDate(startTime));
@@ -132,13 +136,13 @@ public class JobClient {
     }
 
     /**
-     *  重复执行定时任务
+     * 重复执行定时任务
      * @param name
      * @param group
-     * @param startTime [long]
+     * @param startTime
      * @param space
      * @param unit
-     * @param clazz [job class]
+     * @param clazz
      * @param map
      * @return
      */
@@ -157,7 +161,7 @@ public class JobClient {
     }
 
     /**
-     *  删除任务
+     * 删除任务
      * @param name
      * @param group
      * @return
@@ -166,10 +170,18 @@ public class JobClient {
         return schedulerFactory.getScheduler().removeJob(name, group);
     }
 
+    /**
+     * 启动
+     * @return
+     */
     public static boolean start() {
         return schedulerFactory.getScheduler().start();
     }
 
+    /**
+     * 停止调度
+     * @return
+     */
     public static boolean shutdown() {
         return schedulerFactory.getScheduler().shutdown();
     }

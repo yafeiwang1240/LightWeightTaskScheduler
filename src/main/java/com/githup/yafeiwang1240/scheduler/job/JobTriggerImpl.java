@@ -1,8 +1,8 @@
 package com.githup.yafeiwang1240.scheduler.job;
 
-import com.githup.yafeiwang1240.scheduler.expression.Expression;
 import com.githup.yafeiwang1240.scheduler.Job;
 import com.githup.yafeiwang1240.scheduler.core.TimeDecoder;
+import com.githup.yafeiwang1240.scheduler.expression.Expression;
 
 public class JobTriggerImpl implements JobTrigger {
 
@@ -17,7 +17,6 @@ public class JobTriggerImpl implements JobTrigger {
     /**
      * -1L exit
      * -2L new
-     * > 0 normal
      */
     private long nextTime = TimeDecoder.IS_DEFAULT_TIME;
 
@@ -98,9 +97,10 @@ public class JobTriggerImpl implements JobTrigger {
         long now = System.currentTimeMillis();
         if(nextTime == TimeDecoder.IS_DEFAULT_TIME) {
             // 第一次执行的时间
-            if(startTime > now) {
+            if(startTime >= now) {
                 nextTime = startTime;
             } else {
+                nextTime = startTime;
                 while(nextTime < now) {
                     nextTime = expression.getNextTime(nextTime);
                     if(nextTime == TimeDecoder.IS_STOP_TIME) {
@@ -110,7 +110,7 @@ public class JobTriggerImpl implements JobTrigger {
             }
             return;
         }
-        while(nextTime < now && nextTime != TimeDecoder.IS_STOP_TIME) {
+        while(nextTime <= now && nextTime != TimeDecoder.IS_STOP_TIME) {
             nextTime = expression.getNextTime(nextTime);
         }
 

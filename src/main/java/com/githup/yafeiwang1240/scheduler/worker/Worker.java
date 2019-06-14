@@ -38,7 +38,7 @@ public class Worker implements Runnable {
             Method method = job.getMethod(Contains.EXECUTE, JobExecutionContext.class);
             try {
                 method.invoke(job.newInstance(), context);
-                handler.invoke(String.format("开始时间: {0}, 结束时间: {1}, full-name: {2}", t, System.currentTimeMillis(), context.getJobTrigger().getFullName()));
+                handler.invoke(String.format("开始时间: %d, 结束时间: %d, full-name: %s", t, System.currentTimeMillis(), context.getJobTrigger().getFullName()));
             } catch (InstantiationException | IllegalAccessException e) {
                 handler.onFail(t + ": " + e.getMessage());
             } catch (IllegalArgumentException | InvocationTargetException e) {
@@ -48,4 +48,5 @@ public class Worker implements Runnable {
             handler.onFail(t + ": " + e.getMessage());
         }
     }
+
 }

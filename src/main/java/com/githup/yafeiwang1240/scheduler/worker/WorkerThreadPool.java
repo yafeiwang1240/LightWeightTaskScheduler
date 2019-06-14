@@ -21,10 +21,8 @@ public class WorkerThreadPool {
         return executor;
     }
 
-    public static ThreadPoolExecutor newSignalThreadExecutor() {
-        return new ThreadPoolExecutor(1, 1,
-                0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>());
+    public static ExecutorService newSingleThreadExecutor() {
+        return Executors.newSingleThreadExecutor();
     }
 
     private static class IgnorePolicy implements RejectedExecutionHandler {
