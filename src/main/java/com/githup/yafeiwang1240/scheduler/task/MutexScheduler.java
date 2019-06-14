@@ -7,9 +7,7 @@ import com.githup.yafeiwang1240.scheduler.factory.TaskBeanFactory;
 import com.githup.yafeiwang1240.scheduler.factory.TaskFactory;
 import com.githup.yafeiwang1240.scheduler.factory.WorkerBeanFactory;
 import com.githup.yafeiwang1240.scheduler.factory.WorkerFactory;
-import com.githup.yafeiwang1240.scheduler.handler.TaskManageHandler;
 import com.githup.yafeiwang1240.scheduler.handler.TaskMessageHandler;
-import com.githup.yafeiwang1240.scheduler.worker.Worker;
 import com.githup.yafeiwang1240.scheduler.worker.WorkerThreadPool;
 
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ public class MutexScheduler {
 
     private volatile int index = 0;
 
-    private ThreadPoolExecutor mainThreadExecutor = WorkerThreadPool.newSignalThreadExecutor();
+    private ThreadPoolExecutor mainThreadExecutor;
 
     private ThreadPoolExecutor taskThreadExecutor;
 
@@ -44,68 +42,52 @@ public class MutexScheduler {
                     config.getKeepAliveTime(), config.getUnit(),
                     config.getCapacity());
         }
+        mainThreadExecutor = WorkerThreadPool.newSignalThreadExecutor();
         init();
     }
 
     private void init() {
         workerBeanFactory = new WorkerBeanFactory();
-        ((WorkerBeanFactory) workerBeanFactory).setAddWorkerHandler(new TaskManageHandler<String, Worker>() {
-            @Override
-            public void invoke(String key, Worker value) {
-                ((TaskBeanFactory) taskBeanFactory).addWorker(key, value);
-            }
-        });
-        ((WorkerBeanFactory) workerBeanFactory).setRemoveWorkerHandler(new TaskManageHandler<String, Worker>() {
-            @Override
-            public void invoke(String key, Worker value) {
-                ((TaskBeanFactory) taskBeanFactory).removeWorker(key);
-            }
-        });
-
+        ((WorkerBeanFactory) workerBeanFactory).setAddWorkerHandler(
+                (_key, _value) -> ((TaskBeanFactory) taskBeanFactory).addWorker(_key, _value)
+        );
+        ((WorkerBeanFactory) workerBeanFactory).setRemoveWorkerHandler(
+                (_key, _value) -> ((TaskBeanFactory) taskBeanFactory).removeWorker(_key)
+        );
 
         taskBeanFactory = new TaskBeanFactory();
-        ((TaskBeanFactory)taskBeanFactory).setRemoveWorkerHandler(new TaskManageHandler<String, Worker>() {
-            @Override
-            public void invoke(String key, Worker value) {
-                ((WorkerBeanFactory) workerBeanFactory).removeWorker(key);
-            }
-        });
-        ((TaskBeanFactory) taskBeanFactory).setExecuteWorkerHandler(new TaskManageHandler<String, Worker>() {
-            @Override
-            public void invoke(String key, Worker value) {
-                if(value.getHandler() == null) {
-                    value.setHandler(new TaskMessageHandler<Object, String>() {
-                        public Object invoke(String message) {
-                            addLogInfo(true, message);
-                            return null;
+        ((TaskBeanFactory)taskBeanFactory).setRemoveWorkerHandler(
+                (_key, _value) -> ((WorkerBeanFactory) workerBeanFactory).removeWorker(_key)
+        );
+        ((TaskBeanFactory) taskBeanFactory).setExecuteWorkerHandler((_key, _value) -> {
+            if(_value.getHandler() == null) {
+                _value.setHandler(new TaskMessageHandler<Object, String>() {
+                    public Object invoke(String message) {
+                        addLogInfo(true, message);
+                        return null;
+                    }
+                    public void onFail(String message){
+                        addLogInfo(false, message);
+                    }
+                    private void addLogInfo(boolean succeed, String message) {
+                        Info info;
+                        if(index >= loggerInfo.size()) {
+                            info = new Info(succeed, message);
+                            loggerInfo.add(info);
+                        }else {
+                            info = loggerInfo.get(index);
+                            info.setInfo(message);
+                            info.setSucceed(succeed);
                         }
-                        public void onFail(String message){
-                            addLogInfo(false, message);
-                        }
-
-                        private void addLogInfo(boolean succeed, String message) {
-                            Info info = null;
-                            if(index >= loggerInfo.size()) {
-                                info = new Info(succeed, message);
-                                loggerInfo.add(info);
-                            }else {
-                                info = loggerInfo.get(index);
-                                info.setInfo(message);
-                                info.setSucceed(succeed);
-                            }
-                            index = index + 1 < Contains.DEFAULT_LOGGER_SIZE ? index + 1 : 0;
-                        }
-                    });
-                }
-                taskThreadExecutor.execute(value);
+                        index = index + 1 < Contains.DEFAULT_LOGGER_SIZE ? index + 1 : 0;
+                    }
+                });
             }
+            taskThreadExecutor.execute(_value);
         });
-        ((TaskBeanFactory) taskBeanFactory).setTrackerWorkerHandler(new TaskManageHandler<String, TaskBeanFactory.TaskTracker>() {
-            @Override
-            public void invoke(String key, TaskBeanFactory.TaskTracker value) {
-                mainThreadExecutor.execute(value);
-            }
-        });
+        ((TaskBeanFactory) taskBeanFactory).setTrackerWorkerHandler(
+                (_key, _value) ->  mainThreadExecutor.execute(_value)
+        );
     }
 
     public boolean removeJob(String name, String group) {

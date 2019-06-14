@@ -9,7 +9,7 @@
   <version>1.0</version>
 
   <name>LightWeightTaskScheduler</name>
-  <description>io-netty封装</description>
+  <description>轻量级任务调度框架</description>
   <url>https://github.com/yafeiwang1240/LightWeightTaskScheduler</url>
   <licenses>
     <license>
