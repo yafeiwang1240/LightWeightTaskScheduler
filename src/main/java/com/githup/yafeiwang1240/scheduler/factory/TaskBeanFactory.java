@@ -1,5 +1,6 @@
 package com.githup.yafeiwang1240.scheduler.factory;
 
+import com.githup.yafeiwang1240.obrien.uitls.IOUtils;
 import com.githup.yafeiwang1240.scheduler.context.JobExecutionContext;
 import com.githup.yafeiwang1240.scheduler.core.TimeDecoder;
 import com.githup.yafeiwang1240.scheduler.handler.TaskManageHandler;
@@ -73,7 +74,7 @@ public class TaskBeanFactory implements TaskFactory {
     }
 
     @Override
-    public boolean start() {
+    public synchronized boolean start() {
         // 重复启动
         if(!(state == TaskState.NEW || state == TaskState.SHUTDOWN)) {
             return false;
@@ -93,7 +94,7 @@ public class TaskBeanFactory implements TaskFactory {
     }
 
     @Override
-    public boolean shutdown() {
+    public synchronized boolean shutdown() {
         // 已关闭 或者 未启动
         if(state == TaskState.NEW || state == TaskState.SHUTDOWN) {
             return false;
@@ -110,6 +111,7 @@ public class TaskBeanFactory implements TaskFactory {
         public void run() {
             Map<String, Worker> removes = null;
             Map<String, Worker> executes = null;
+            exit = false;
             while(!exit) {
                 long now = System.currentTimeMillis();
                 for(Map.Entry<String, Worker> work : workerMap.entrySet()) {
@@ -147,20 +149,13 @@ public class TaskBeanFactory implements TaskFactory {
                         String key = work.getKey();
                         Worker worker = work.getValue();
                         executeWorker(key, worker);
-                        try {
-                            Thread.sleep(1);
-                        } catch (InterruptedException e) {
-
-                        }
+                        IOUtils.sleep(1);
                     }
                     executes.clear();
                 } else {
-                    try {
-                        Thread.sleep(1);
-                    } catch (InterruptedException e) {
-
-                    }
+                    IOUtils.sleep(1);
                 }
+
             }
         }
         private void stop() {
