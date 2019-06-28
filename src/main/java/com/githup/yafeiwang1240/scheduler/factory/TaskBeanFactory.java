@@ -59,6 +59,10 @@ public class TaskBeanFactory implements TaskFactory {
     }
 
     public boolean executeWorker(String fullName, Worker worker) {
+        // 判断是否允许并发
+        if(worker.isRunning()) {
+            return false;
+        }
         executeWorkerHandler.invoke(fullName, worker);
         worker.getContext().getJobTrigger().compute();
         return true;
