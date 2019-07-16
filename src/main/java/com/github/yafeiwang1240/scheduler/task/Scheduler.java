@@ -9,7 +9,7 @@ public interface Scheduler {
 
     boolean removeJob(String name, String group);
 
-    boolean sumbitJob(String name, String group, long startTime, Expression expression, Class<? extends Job> clazz, Map<?, ?> dataMap);
+    boolean submitJob(String name, String group, long startTime, Expression expression, Class<? extends Job> clazz, Map<?, ?> dataMap);
 
     boolean start();
 

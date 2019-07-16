@@ -29,8 +29,8 @@ public class SchedulerImpl implements Scheduler {
     }
 
     @Override
-    public boolean sumbitJob(String name, String group, long startTime, Expression expression, Class<? extends Job> clazz, Map<?, ?> dataMap) {
-        return mutexScheduler.sumbitJob(name, group, startTime, expression, clazz, dataMap);
+    public boolean submitJob(String name, String group, long startTime, Expression expression, Class<? extends Job> clazz, Map<?, ?> dataMap) {
+        return mutexScheduler.submitJob(name, group, startTime, expression, clazz, dataMap);
     }
 
     @Override

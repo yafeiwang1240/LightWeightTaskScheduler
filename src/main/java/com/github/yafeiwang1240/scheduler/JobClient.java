@@ -1,6 +1,8 @@
 package com.github.yafeiwang1240.scheduler;
 
 import com.github.yafeiwang1240.scheduler.core.TimeDecoder;
+import com.github.yafeiwang1240.scheduler.expression.cron.Cron;
+import com.github.yafeiwang1240.scheduler.expression.cron.CronExpression;
 import com.github.yafeiwang1240.scheduler.expression.time.TimeExpression;
 import com.github.yafeiwang1240.scheduler.factory.SchedulerFactory;
 import com.github.yafeiwang1240.scheduler.task.Scheduler;
@@ -148,7 +150,21 @@ public class JobClient {
      */
     public static boolean submit(String name, String group, long startTime, long space, TimeUnit unit, Class<? extends Job> clazz, Map<?, ?> map) {
         TimeExpression timeExpression = new TimeExpression(space, unit);
-        return schedulerFactory.getScheduler().sumbitJob(name, group, startTime, timeExpression, clazz, map);
+        return schedulerFactory.getScheduler().submitJob(name, group, startTime, timeExpression, clazz, map);
+    }
+
+    /**
+     * c'ron表达式
+     * @param name
+     * @param group
+     * @param cronExpress
+     * @param clazz
+     * @param map
+     * @return
+     */
+    public static boolean submitCron(String name, String group, String cronExpress, Class<? extends Job> clazz, Map<?, ?> map) {
+        Cron cron = new CronExpression(cronExpress);
+        return schedulerFactory.getScheduler().submitJob(name, group, System.currentTimeMillis(), cron, clazz, map);
     }
 
     /**

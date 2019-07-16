@@ -95,7 +95,7 @@ public class MutexScheduler {
         return workerBeanFactory.removeWorker(name, group);
     }
 
-    public boolean sumbitJob(String name, String group, long startTime, Expression expression,
+    public boolean submitJob(String name, String group, long startTime, Expression expression,
                              Class<? extends Job> clazz, Map<?, ?> dataMap) {
         return workerBeanFactory.addWorker(name, group, startTime, expression, clazz, dataMap);
     }
