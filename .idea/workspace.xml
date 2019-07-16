@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5c2042d-55ec-4969-a36e-504d61abc070" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/analysis/CronArray.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/analysis/CronField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/util/CompareUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/util/CronShapingUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/util/CronUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/JobClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/JobClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/core/TimeDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/core/TimeDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/Cron.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/Cron.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/CronExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/CronExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/task/MutexScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/task/MutexScheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/task/Scheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/task/Scheduler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/task/SchedulerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/task/SchedulerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/util/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/util/DateUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -25,6 +12,9 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="17" />
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
@@ -115,15 +105,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/Expression.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/factory/WorkerBeanFactory.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="79">
@@ -135,16 +116,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="274">
+              <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#646#647#0" expanded="true" />
                 <element signature="e#669#670#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="222">
+              <caret line="233" column="59" selection-start-line="233" selection-start-column="59" selection-end-line="233" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -235,7 +225,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/githup/yafeiwang1240/scheduler/factory/TaskBeanFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/factory/TaskBeanFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/factory/WorkerBeanFactory.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/CronArray.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/CronUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/CompareUtils.java" />
@@ -253,6 +242,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/expression/cron/analysis/CronField.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/core/TimeDecoder.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/App.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -299,32 +289,6 @@
             <path>
               <item name="LightWeightTaskScheduler" type="b2602c69:ProjectViewProjectNode" />
               <item name="LightWeightTaskScheduler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LightWeightTaskScheduler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LightWeightTaskScheduler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LightWeightTaskScheduler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LightWeightTaskScheduler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LightWeightTaskScheduler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LightWeightTaskScheduler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LightWeightTaskScheduler" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LightWeightTaskScheduler" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="yafeiwang1240" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -411,7 +375,7 @@
       <workItem from="1562222609551" duration="8000" />
       <workItem from="1562840160995" duration="762000" />
       <workItem from="1563169465871" duration="901000" />
-      <workItem from="1563241361257" duration="18486000" />
+      <workItem from="1563241361257" duration="19374000" />
     </task>
     <task id="LOCAL-00001" summary="新建自定义轻量级任务调度框架">
       <created>1560221978218</created>
@@ -476,11 +440,18 @@
       <option name="project" value="LOCAL" />
       <updated>1562159205126</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="支持cron表达式">
+      <created>1563265342965</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1563265342965</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95402000" />
+    <option name="totallyTimeSpent" value="96290000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -496,23 +467,23 @@
       <window_info anchor="bottom" id="Messages" order="0" weight="0.27886322" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" weight="0.06571936" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.24156305" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.3143872" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.24156305" />
+      <window_info anchor="bottom" id="Debug" order="4" weight="0.634103" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.3285968" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4995958" weight="0.053285968" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4995958" visible="true" weight="0.3587922" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5004042" side_tool="true" weight="0.38898757" />
-      <window_info anchor="right" id="Coverage" sideWeight="0.503268" side_tool="true" weight="0.08973323" />
+      <window_info anchor="right" id="Coverage" sideWeight="0.50259066" side_tool="true" weight="0.16168149" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Maven" order="5" sideWeight="0.49837133" visible="true" weight="0.16168149" />
+      <window_info anchor="right" id="Maven" order="5" sideWeight="0.4974093" visible="true" weight="0.16168149" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Database" order="8" />
@@ -530,23 +501,13 @@
     <MESSAGE value="接入入OBrien项目" />
     <MESSAGE value="添加任务并发控制功能" />
     <MESSAGE value="github" />
-    <option name="LAST_COMMIT_MESSAGE" value="github" />
+    <MESSAGE value="支持cron表达式" />
+    <option name="LAST_COMMIT_MESSAGE" value="支持cron表达式" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/LightWeightTaskScheduler$App.ic" NAME="App Coverage Results" MODIFIED="1563265277357" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/factory/SchedulerBeanFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="17" column="21" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-          <folding>
-            <element signature="e#308#309#0" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/scheduler/factory/TaskFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -1003,13 +964,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/github/yafeiwang1240/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        <state relative-caret-position="274">
+          <caret line="49" column="5" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#646#647#0" expanded="true" />
             <element signature="e#669#670#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="233" column="59" selection-start-line="233" selection-start-column="59" selection-end-line="233" selection-end-column="59" />
         </state>
       </provider>
     </entry>
