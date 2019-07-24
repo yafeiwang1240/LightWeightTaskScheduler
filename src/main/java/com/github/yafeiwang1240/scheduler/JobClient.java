@@ -18,6 +18,8 @@ public class JobClient {
 
     private static SchedulerFactory schedulerFactory;
 
+    private static final String ONLY_ONE_GROUP = "ONLY_ONE_GROUP";
+
     static {
         Scheduler scheduler = SchedulerBuilder.newSchedulerBuilder()
                 .withCorePoolSize(5)
@@ -27,6 +29,18 @@ public class JobClient {
                 .withCapacity(30)
                 .build();
         schedulerFactory = new SchedulerBeanFactory(scheduler);
+    }
+
+    /**
+     * 五分钟后执行且执行一次
+     * @param name
+     * @param clazz
+     * @return
+     * @throws ParseException
+     */
+    public static boolean submit(String name, Class<? extends Job> clazz) throws ParseException{
+        long startTime = System.currentTimeMillis() + 300000L;
+        return submit(name, ONLY_ONE_GROUP, startTime, TimeDecoder.IS_STOP_TIME, null, clazz, null);
     }
 
     /**
@@ -154,7 +168,7 @@ public class JobClient {
     }
 
     /**
-     * c'ron表达式
+     * cron表达式
      * @param name
      * @param group
      * @param cronExpress

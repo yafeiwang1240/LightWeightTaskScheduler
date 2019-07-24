@@ -65,16 +65,15 @@ public class TaskBeanFactory implements TaskFactory {
 
         if (worker.isRunning()) {
             Class<? extends Job> clazz = worker.getContext().getJobTrigger().getJobClass();
-            // 覆盖运行
-            if (clazz.isAnnotationPresent(Coverage.class)) {
-                worker.getFuture().cancel(true);
-            }
             // 不允许并发
             if (clazz.isAnnotationPresent(EnableConcurrency.class)) {
                 return false;
             }
+            // 覆盖运行
+            if (clazz.isAnnotationPresent(Coverage.class)) {
+                worker.getFuture().cancel(true);
+            }
         }
-        if (worker.getFuture().isCancelled())
         executeWorkerHandler.invoke(fullName, worker);
         worker.getContext().getJobTrigger().compute();
         return true;

@@ -31,7 +31,7 @@ public class CompareUtils {
     public static boolean assertRange(int left, int right, int value) {
         if (value > right || value < left) {
             throw new IllegalArgumentException("无效的数值: "
-                    + value + "is not int [" + left + ", " + right + "]");
+                    + value + " is not int [" + left + ", " + right + "]");
         }
         return true;
     }
