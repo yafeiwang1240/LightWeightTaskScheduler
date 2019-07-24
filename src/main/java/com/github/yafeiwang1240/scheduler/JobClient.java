@@ -20,11 +20,11 @@ public class JobClient {
 
     static {
         Scheduler scheduler = SchedulerBuilder.newSchedulerBuilder()
-                .withCorePoolSize(1)
+                .withCorePoolSize(5)
                 .withGroup("Scheduler_Group")
-                .withMaximumPoolSize(5)
+                .withMaximumPoolSize(12)
                 .withName("Scheduler")
-                .withCapacity(40)
+                .withCapacity(30)
                 .build();
         schedulerFactory = new SchedulerBeanFactory(scheduler);
     }

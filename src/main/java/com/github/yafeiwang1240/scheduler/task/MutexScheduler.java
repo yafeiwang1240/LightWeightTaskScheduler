@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class MutexScheduler {
@@ -84,7 +85,8 @@ public class MutexScheduler {
                     }
                 });
             }
-            taskThreadExecutor.execute(_value);
+            Future<?> future = taskThreadExecutor.submit(_value);
+            _value.setFuture(future);
         });
         ((TaskBeanFactory) taskBeanFactory).setTrackerWorkerHandler(
                 (_key, _value) ->  mainThreadExecutor.execute(_value)

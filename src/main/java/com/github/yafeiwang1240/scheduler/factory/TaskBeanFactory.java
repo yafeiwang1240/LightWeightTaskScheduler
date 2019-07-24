@@ -1,5 +1,8 @@
 package com.github.yafeiwang1240.scheduler.factory;
 
+import com.github.yafeiwang1240.scheduler.Job;
+import com.github.yafeiwang1240.scheduler.annotation.Coverage;
+import com.github.yafeiwang1240.scheduler.annotation.EnableConcurrency;
 import com.github.yafeiwang1240.scheduler.context.JobExecutionContext;
 import com.github.yafeiwang1240.scheduler.core.TimeDecoder;
 import com.github.yafeiwang1240.scheduler.job.JobTrigger;
@@ -59,10 +62,19 @@ public class TaskBeanFactory implements TaskFactory {
     }
 
     public boolean executeWorker(String fullName, Worker worker) {
-        // 判断是否允许并发
-        if(worker.isRunning()) {
-            return false;
+
+        if (worker.isRunning()) {
+            Class<? extends Job> clazz = worker.getContext().getJobTrigger().getJobClass();
+            // 覆盖运行
+            if (clazz.isAnnotationPresent(Coverage.class)) {
+                worker.getFuture().cancel(true);
+            }
+            // 不允许并发
+            if (clazz.isAnnotationPresent(EnableConcurrency.class)) {
+                return false;
+            }
         }
+        if (worker.getFuture().isCancelled())
         executeWorkerHandler.invoke(fullName, worker);
         worker.getContext().getJobTrigger().compute();
         return true;
