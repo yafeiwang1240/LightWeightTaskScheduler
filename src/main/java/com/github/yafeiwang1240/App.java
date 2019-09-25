@@ -43,7 +43,7 @@ public class App
         JobClient.start();
 
         try {
-            JobClient.submitCron("test", "test", "18/5 14-15 1 * 1 * 2019", JobText.class, map);
+            JobClient.submitCron("test", "test", "18/5 14-15 1 1 7 * 2019", JobText.class, map);
         } catch (Exception e) {
             e.printStackTrace();
         }

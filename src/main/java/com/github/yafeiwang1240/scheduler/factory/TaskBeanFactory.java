@@ -128,49 +128,50 @@ public class TaskBeanFactory implements TaskFactory {
             Map<String, Worker> executes = null;
             exit = false;
             while(!exit) {
-                long now = System.currentTimeMillis();
-                for(Map.Entry<String, Worker> work : workerMap.entrySet()) {
-                    String key = work.getKey();
-                    Worker worker = work.getValue();
-                    JobExecutionContext context = worker.getContext();
-                    JobTrigger jobTrigger = context.getJobTrigger();
-                    long nextTime = jobTrigger.getNextTime();
-                    // 使用创建 防止任务稀疏
-                    if(nextTime == TimeDecoder.IS_STOP_TIME) {
-                        if(removes == null) {
-                            removes = new HashMap<>();
-                        }
-                        removes.put(key, worker);
-                    } else if(now >= nextTime) {
-                        if(executes == null) {
-                            executes = new HashMap<>();
-                        }
-                        executes.put(key, worker);
-                    }
-                }
-                // remove
-                if(removes != null && removes.size() > 0) {
-                    for(Map.Entry<String, Worker> work : removes.entrySet()) {
+                try {
+                    long now = System.currentTimeMillis();
+                    for(Map.Entry<String, Worker> work : workerMap.entrySet()) {
                         String key = work.getKey();
                         Worker worker = work.getValue();
-                        removeWorker(key, worker);
+                        JobExecutionContext context = worker.getContext();
+                        JobTrigger jobTrigger = context.getJobTrigger();
+                        long nextTime = jobTrigger.getNextTime();
+                        // 使用创建 防止任务稀疏
+                        if(nextTime == TimeDecoder.IS_STOP_TIME) {
+                            if(removes == null) {
+                                removes = new HashMap<>();
+                            }
+                            removes.put(key, worker);
+                        } else if(now >= nextTime) {
+                            if(executes == null) {
+                                executes = new HashMap<>();
+                            }
+                            executes.put(key, worker);
+                        }
                     }
-                    removes.clear();
-                }
+                    // remove
+                    if(removes != null && removes.size() > 0) {
+                        for(Map.Entry<String, Worker> work : removes.entrySet()) {
+                            String key = work.getKey();
+                            Worker worker = work.getValue();
+                            removeWorker(key, worker);
+                        }
+                        removes.clear();
+                    }
 
-                // execute
-                if(executes !=  null && executes.size() > 0) {
-                    for(Map.Entry<String, Worker> work : executes.entrySet()) {
-                        String key = work.getKey();
-                        Worker worker = work.getValue();
-                        executeWorker(key, worker);
+                    // execute
+                    if(executes !=  null && executes.size() > 0) {
+                        for(Map.Entry<String, Worker> work : executes.entrySet()) {
+                            String key = work.getKey();
+                            Worker worker = work.getValue();
+                            executeWorker(key, worker);
+                            IOUtils.sleep(1);
+                        }
+                        executes.clear();
+                    } else {
                         IOUtils.sleep(1);
                     }
-                    executes.clear();
-                } else {
-                    IOUtils.sleep(1);
-                }
-
+                } catch (Throwable throwable) { }
             }
         }
         private void stop() {

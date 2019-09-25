@@ -56,12 +56,8 @@ public class Worker implements Runnable {
             init();
             cache.method.invoke(cache.instance, context);
             handler.invoke(String.format("开始时间: %d, 结束时间: %d, full-name: %s", t, System.currentTimeMillis(), context.getJobTrigger().getFullName()));
-        } catch (NoSuchMethodException | SecurityException e) {
-            handler.onFail(t + ": " + e.getMessage());
-        } catch (InstantiationException | IllegalAccessException e) {
-            handler.onFail(t + ": " + e.getMessage());
-        } catch (IllegalArgumentException | InvocationTargetException e) {
-            handler.onFail(t + ": " + e.getMessage());
+        } catch (Throwable throwable) {
+            handler.onFail(t + ": " + throwable.getMessage());
         } finally {
             running = false;
         }
