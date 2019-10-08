@@ -1,12 +1,10 @@
 package com.github.yafeiwang1240.scheduler.worker;
 
 import com.github.yafeiwang1240.scheduler.Job;
-import com.github.yafeiwang1240.scheduler.annotation.EnableConcurrency;
 import com.github.yafeiwang1240.scheduler.commons.Contains;
 import com.github.yafeiwang1240.scheduler.context.JobExecutionContext;
 import com.github.yafeiwang1240.scheduler.handler.TaskMessageHandler;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.Future;
 
