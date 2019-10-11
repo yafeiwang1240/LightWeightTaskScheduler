@@ -121,7 +121,6 @@ public class TaskBeanFactory implements TaskFactory {
 
     public class TaskTracker implements Runnable {
         private boolean exit = false;
-        private int sum = 0;
         @Override
         public void run() {
             Map<String, Worker> removes = null;

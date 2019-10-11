@@ -25,6 +25,8 @@ public class MutexScheduler {
 
     private ExecutorService mainThreadExecutor;
 
+    private Future<?> mainFuture;
+
     private ThreadPoolExecutor taskThreadExecutor;
 
     private WorkerFactory workerBeanFactory;
@@ -44,7 +46,7 @@ public class MutexScheduler {
                     config.getKeepAliveTime(), config.getUnit(),
                     config.getCapacity());
         }
-        mainThreadExecutor = WorkerThreadPool.newSingleThreadExecutor();
+        mainThreadExecutor = WorkerThreadPool.newFixedThreadPool(2);
         init();
     }
 
@@ -61,6 +63,7 @@ public class MutexScheduler {
         ((TaskBeanFactory)taskBeanFactory).setRemoveWorkerHandler(
                 (_key, _value) -> ((WorkerBeanFactory) workerBeanFactory).removeWorker(_key)
         );
+
         ((TaskBeanFactory) taskBeanFactory).setExecuteWorkerHandler((_key, _value) -> {
             if(_value.getHandler() == null) {
                 _value.setHandler(new TaskMessageHandler<Object, String>() {
@@ -88,9 +91,27 @@ public class MutexScheduler {
             Future<?> future = taskThreadExecutor.submit(_value);
             _value.setFuture(future);
         });
+
         ((TaskBeanFactory) taskBeanFactory).setTrackerWorkerHandler(
-                (_key, _value) ->  mainThreadExecutor.execute(_value)
+                (_key, _value) ->  mainFuture = mainThreadExecutor.submit(_value)
         );
+
+        mainThreadExecutor.execute(() -> {
+            while (true) {
+                if (((TaskBeanFactory) taskBeanFactory).getState()
+                        .equals(TaskBeanFactory.TaskState.RUNNING)) {
+                    if (mainFuture == null || mainFuture.isCancelled() || mainFuture.isDone()) {
+                        taskBeanFactory.shutdown();
+                        taskBeanFactory.start();
+                    }
+                }
+                try {
+                    Thread.sleep(60000);
+                } catch (InterruptedException e) {
+                    // ignore
+                }
+            }
+        });
     }
 
     public boolean removeJob(String name, String group) {

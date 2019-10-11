@@ -21,6 +21,10 @@ public class WorkerThreadPool {
         return executor;
     }
 
+    public static ExecutorService newFixedThreadPool(int threads) {
+        return Executors.newFixedThreadPool(threads);
+    }
+
     public static ExecutorService newSingleThreadExecutor() {
         return Executors.newSingleThreadExecutor();
     }
