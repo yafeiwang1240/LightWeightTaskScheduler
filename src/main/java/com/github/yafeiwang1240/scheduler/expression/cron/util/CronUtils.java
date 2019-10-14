@@ -18,7 +18,7 @@ public class CronUtils {
      */
     public static List<String> cut(String cron) {
         cron.trim();
-        String[] array = cron.replaceAll("\\s+ ", " ").split("\\s");
+        String[] array = cron.split("\\s+");
         return Lists.asList(array);
     }
 
