@@ -22,9 +22,9 @@ public class JobClient {
 
     static {
         Scheduler scheduler = SchedulerBuilder.newSchedulerBuilder()
-                .withCorePoolSize(5)
+                .withCorePoolSize(10)
                 .withGroup("Scheduler_Group")
-                .withMaximumPoolSize(12)
+                .withMaximumPoolSize(15)
                 .withName("Scheduler")
                 .withCapacity(30)
                 .build();
