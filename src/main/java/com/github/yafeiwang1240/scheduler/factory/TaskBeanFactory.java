@@ -128,6 +128,7 @@ public class TaskBeanFactory implements TaskFactory {
             exit = false;
             while(!exit) {
                 try {
+                    IOUtils.sleep(20);
                     long now = System.currentTimeMillis();
                     for(Map.Entry<String, Worker> work : workerMap.entrySet()) {
                         String key = work.getKey();
@@ -164,13 +165,13 @@ public class TaskBeanFactory implements TaskFactory {
                             String key = work.getKey();
                             Worker worker = work.getValue();
                             executeWorker(key, worker);
-                            IOUtils.sleep(1);
+                            IOUtils.sleep(2);
                         }
                         executes.clear();
-                    } else {
-                        IOUtils.sleep(1);
                     }
-                } catch (Throwable throwable) { }
+                } catch (Throwable throwable) {
+                    IOUtils.sleep(2);
+                }
             }
         }
         private void stop() {
