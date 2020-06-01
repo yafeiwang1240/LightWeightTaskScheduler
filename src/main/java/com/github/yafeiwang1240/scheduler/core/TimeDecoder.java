@@ -6,7 +6,6 @@ import com.github.yafeiwang1240.scheduler.expression.cron.analysis.CronField;
 import com.github.yafeiwang1240.scheduler.expression.time.TimeExpression;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,7 +49,7 @@ public class TimeDecoder {
         int minute = calendar.get(Calendar.MINUTE);
         int second = calendar.get(Calendar.SECOND);
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1;
+        int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         /**

@@ -6,7 +6,7 @@
 
     <groupId>com.github.yafeiwang1240</groupId>
     <artifactId>LightWeightTaskScheduler</artifactId>
-    <version>1.1.9</version>
+    <version>1.1.10</version>
 
     <name>LightWeightTaskScheduler</name>
     <description>轻量级任务调度框架</description>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.github.yafeiwang1240</groupId>
             <artifactId>OBrien</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.6</version>
         </dependency>
     </dependencies>
 
