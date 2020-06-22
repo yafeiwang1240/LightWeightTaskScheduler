@@ -21,7 +21,7 @@ public class Worker implements Runnable {
 
     private Future<?> future;
 
-    private boolean running;
+    private volatile boolean running;
 
     private JobCache cache;
 

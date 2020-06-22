@@ -24,9 +24,9 @@ public class TaskBeanFactory implements TaskFactory {
         SHUTDOWN,
     }
 
-    private TaskState state = TaskState.NEW;
+    private volatile TaskState state = TaskState.NEW;
 
-    private Map<String, Worker> workerMap = new ConcurrentHashMap<>();
+    private volatile Map<String, Worker> workerMap = new ConcurrentHashMap<>();
 
     private TaskManageHandler<String, Worker> executeWorkerHandler;
 
@@ -34,7 +34,7 @@ public class TaskBeanFactory implements TaskFactory {
 
     private TaskManageHandler<String, Worker> removeWorkerHandler;
 
-    private TaskTracker taskTracker;
+    private volatile TaskTracker taskTracker;
 
     public void setExecuteWorkerHandler(TaskManageHandler<String, Worker> executeWorkerHandler) {
         this.executeWorkerHandler = executeWorkerHandler;
@@ -120,7 +120,7 @@ public class TaskBeanFactory implements TaskFactory {
     }
 
     public class TaskTracker implements Runnable {
-        private boolean exit = false;
+        private volatile boolean exit = false;
         @Override
         public void run() {
             Map<String, Worker> removes = null;

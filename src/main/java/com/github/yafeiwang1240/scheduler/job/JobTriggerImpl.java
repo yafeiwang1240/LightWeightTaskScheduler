@@ -18,7 +18,7 @@ public class JobTriggerImpl implements JobTrigger {
      * -1L exit
      * -2L new
      */
-    private long nextTime = TimeDecoder.IS_DEFAULT_TIME;
+    private volatile long nextTime = TimeDecoder.IS_DEFAULT_TIME;
 
     @Override
     public JobDetail getJobDetail() {

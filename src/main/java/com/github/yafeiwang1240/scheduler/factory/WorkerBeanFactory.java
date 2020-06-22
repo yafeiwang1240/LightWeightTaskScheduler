@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class WorkerBeanFactory implements WorkerFactory {
 
-    private Map<String, Worker> workerMap = new ConcurrentHashMap<>();
+    private volatile Map<String, Worker> workerMap = new ConcurrentHashMap<>();
 
     private TaskManageHandler<String, Worker> addWorkerHandler;
 
@@ -49,6 +49,7 @@ public class WorkerBeanFactory implements WorkerFactory {
             JobExecutionContextImpl jobExecutionContext = new JobExecutionContextImpl(jobTrigger);
             worker = new Worker();
             worker.setContext(jobExecutionContext);
+            workerMap.put(fullName, worker);
             addWorkerHandler.invoke(fullName, worker);
         } else {
             JobExecutionContext jobExecutionContext = worker.getContext();

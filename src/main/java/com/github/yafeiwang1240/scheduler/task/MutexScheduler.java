@@ -19,7 +19,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 public class MutexScheduler {
 
-    private List<Info> loggerInfo = new ArrayList<>(Contains.DEFAULT_LOGGER_SIZE);
+    private volatile List<Info> loggerInfo = new ArrayList<>(Contains.DEFAULT_LOGGER_SIZE);
 
     private volatile int index = 0;
 
