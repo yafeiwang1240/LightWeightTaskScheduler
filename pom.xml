@@ -6,7 +6,7 @@
 
     <groupId>com.github.yafeiwang1240</groupId>
     <artifactId>LightWeightTaskScheduler</artifactId>
-    <version>1.1.11</version>
+    <version>1.1.12</version>
 
     <name>LightWeightTaskScheduler</name>
     <description>轻量级任务调度框架</description>

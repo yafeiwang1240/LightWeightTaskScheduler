@@ -178,7 +178,21 @@ public class JobClient {
      */
     public static boolean submitCron(String name, String group, String cronExpress, Class<? extends Job> clazz, Map<?, ?> map) {
         Cron cron = new CronExpression(cronExpress);
-        return schedulerFactory.getScheduler().submitJob(name, group, System.currentTimeMillis(), cron, clazz, map);
+        return schedulerFactory.getScheduler().submitJob(name, group, System.currentTimeMillis() - 1000, cron, clazz, map);
+    }
+
+    /**
+     * 先执行一次，然后根据cron表达式执行
+     * @param name
+     * @param group
+     * @param cronExpress
+     * @param clazz
+     * @param map
+     * @return
+     */
+    public static boolean submitRunThenCron(String name, String group, String cronExpress, Class<? extends Job> clazz, Map<?, ?> map) {
+        Cron cron = new CronExpression(cronExpress);
+        return schedulerFactory.getScheduler().submitJob(name, group, System.currentTimeMillis() + 1000, cron, clazz, map);
     }
 
     /**
